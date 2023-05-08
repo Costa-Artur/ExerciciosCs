@@ -1,0 +1,14 @@
+C:\Users\7828497\Desktop\aula02\teste2\teste2\bin\Debug\teste2.exe.config
+C:\Users\7828497\Desktop\aula02\teste2\teste2\bin\Debug\teste2.exe
+C:\Users\7828497\Desktop\aula02\teste2\teste2\bin\Debug\teste2.pdb
+C:\Users\7828497\Desktop\aula02\teste2\teste2\obj\Debug\teste2.csproj.AssemblyReference.cache
+C:\Users\7828497\Desktop\aula02\teste2\teste2\obj\Debug\teste2.csproj.CoreCompileInputs.cache
+C:\Users\7828497\Desktop\aula02\teste2\teste2\obj\Debug\teste2.exe
+C:\Users\7828497\Desktop\aula02\teste2\teste2\obj\Debug\teste2.pdb
+C:\Users\7828497\Desktop\aula02\ex01\teste2\teste2\bin\Debug\teste2.exe.config
+C:\Users\7828497\Desktop\aula02\ex01\teste2\teste2\bin\Debug\teste2.exe
+C:\Users\7828497\Desktop\aula02\ex01\teste2\teste2\bin\Debug\teste2.pdb
+C:\Users\7828497\Desktop\aula02\ex01\teste2\teste2\obj\Debug\teste2.csproj.AssemblyReference.cache
+C:\Users\7828497\Desktop\aula02\ex01\teste2\teste2\obj\Debug\teste2.csproj.CoreCompileInputs.cache
+C:\Users\7828497\Desktop\aula02\ex01\teste2\teste2\obj\Debug\teste2.exe
+C:\Users\7828497\Desktop\aula02\ex01\teste2\teste2\obj\Debug\teste2.pdb
