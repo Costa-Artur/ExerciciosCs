@@ -1,0 +1,7 @@
+C:\Users\7828497\Desktop\aula02\ex02\ex02\bin\Debug\ex02.exe.config
+C:\Users\7828497\Desktop\aula02\ex02\ex02\bin\Debug\ex02.exe
+C:\Users\7828497\Desktop\aula02\ex02\ex02\bin\Debug\ex02.pdb
+C:\Users\7828497\Desktop\aula02\ex02\ex02\obj\Debug\ex02.csproj.AssemblyReference.cache
+C:\Users\7828497\Desktop\aula02\ex02\ex02\obj\Debug\ex02.csproj.CoreCompileInputs.cache
+C:\Users\7828497\Desktop\aula02\ex02\ex02\obj\Debug\ex02.exe
+C:\Users\7828497\Desktop\aula02\ex02\ex02\obj\Debug\ex02.pdb
