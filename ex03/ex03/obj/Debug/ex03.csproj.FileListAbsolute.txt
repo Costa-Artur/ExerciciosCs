@@ -1,0 +1,7 @@
+C:\Users\7828497\Desktop\aula02\ex03\ex03\bin\Debug\ex03.exe.config
+C:\Users\7828497\Desktop\aula02\ex03\ex03\bin\Debug\ex03.exe
+C:\Users\7828497\Desktop\aula02\ex03\ex03\bin\Debug\ex03.pdb
+C:\Users\7828497\Desktop\aula02\ex03\ex03\obj\Debug\ex03.csproj.AssemblyReference.cache
+C:\Users\7828497\Desktop\aula02\ex03\ex03\obj\Debug\ex03.csproj.CoreCompileInputs.cache
+C:\Users\7828497\Desktop\aula02\ex03\ex03\obj\Debug\ex03.exe
+C:\Users\7828497\Desktop\aula02\ex03\ex03\obj\Debug\ex03.pdb
