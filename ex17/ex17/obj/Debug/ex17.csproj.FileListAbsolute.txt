@@ -1,7 +1,0 @@
-C:\Users\7828497\Desktop\aula02\ex17\ex17\bin\Debug\ex17.exe.config
-C:\Users\7828497\Desktop\aula02\ex17\ex17\bin\Debug\ex17.exe
-C:\Users\7828497\Desktop\aula02\ex17\ex17\bin\Debug\ex17.pdb
-C:\Users\7828497\Desktop\aula02\ex17\ex17\obj\Debug\ex17.csproj.AssemblyReference.cache
-C:\Users\7828497\Desktop\aula02\ex17\ex17\obj\Debug\ex17.csproj.CoreCompileInputs.cache
-C:\Users\7828497\Desktop\aula02\ex17\ex17\obj\Debug\ex17.exe
-C:\Users\7828497\Desktop\aula02\ex17\ex17\obj\Debug\ex17.pdb
