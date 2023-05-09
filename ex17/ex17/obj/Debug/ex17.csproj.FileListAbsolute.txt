@@ -1,0 +1,7 @@
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\ex17\ex17\obj\Debug\ex17.csproj.AssemblyReference.cache
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\ex17\ex17\obj\Debug\ex17.csproj.CoreCompileInputs.cache
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\ex17\ex17\bin\Debug\ex17.exe.config
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\ex17\ex17\bin\Debug\ex17.exe
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\ex17\ex17\bin\Debug\ex17.pdb
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\ex17\ex17\obj\Debug\ex17.exe
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\ex17\ex17\obj\Debug\ex17.pdb
