@@ -1,0 +1,7 @@
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\exercicioBancoDeDados\exercicioBancoDeDados\obj\Debug\exercicioBancoDeDados.csproj.AssemblyReference.cache
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\exercicioBancoDeDados\exercicioBancoDeDados\obj\Debug\exercicioBancoDeDados.csproj.CoreCompileInputs.cache
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\exercicioBancoDeDados\exercicioBancoDeDados\bin\Debug\exercicioBancoDeDados.exe.config
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\exercicioBancoDeDados\exercicioBancoDeDados\bin\Debug\exercicioBancoDeDados.exe
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\exercicioBancoDeDados\exercicioBancoDeDados\bin\Debug\exercicioBancoDeDados.pdb
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\exercicioBancoDeDados\exercicioBancoDeDados\obj\Debug\exercicioBancoDeDados.exe
+C:\Users\artur\Documents\PROGRAMAÇÃO\C#\exercicioBancoDeDados\exercicioBancoDeDados\obj\Debug\exercicioBancoDeDados.pdb
