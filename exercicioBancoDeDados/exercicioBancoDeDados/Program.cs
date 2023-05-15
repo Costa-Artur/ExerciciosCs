@@ -10,6 +10,7 @@ namespace exercicioBancoDeDados
     class Program
     {
 
+
         static bool checkInt(string prompt, out int value)
         {
             Console.Write(prompt + " ");
@@ -22,11 +23,16 @@ namespace exercicioBancoDeDados
             return false;
         }
 
-        static bool checkEmail( string email) {
-            if (email.Contains('@')) {
-                
-                return true;
+        static bool checkEmail(string email)
+        {
+            if (email.Contains('@'))
+            {
+                if (email.Contains('.'))
+                {
+                    return true;
+                }
 
+                return false;
             }
             Console.WriteLine("Email Invalido");
             return false;
@@ -43,31 +49,39 @@ namespace exercicioBancoDeDados
             return email;
         }
 
-        static Cliente checkIdCliente (List<Cliente> clientes, int id) {
-            foreach (Cliente cliente in clientes) {
-                if (cliente.Id == id) {
+        static Cliente checkIdCliente(List<Cliente> clientes, int id)
+        {
+            foreach (Cliente cliente in clientes)
+            {
+                if (cliente.Id == id)
+                {
                     return cliente;
-                } 
+                }
             }
             return null;
         }
 
-        static void Main(string[] args)
+        static void salvarClientes(List<Cliente> clientes, string arquivo)
         {
-            string arquivo = "clientes.csv";
-            List<Cliente> clientes = new List<Cliente>();
-            int ultimoID = 0;
-
-            if (!File.Exists(arquivo))
+            using (StreamWriter sw = new StreamWriter(arquivo))
             {
-                using (StreamWriter sw = File.CreateText(arquivo))
+                foreach (Cliente cliente in clientes)
                 {
+                    sw.WriteLine($"{cliente.Id};{cliente.Nome};{cliente.Endereco};{cliente.Telefone};{cliente.Email}");
                 }
             }
+        }
 
-            if (File.Exists(arquivo)) {
-                using (StreamReader sr = new StreamReader(arquivo)) {
-                    while (!sr.EndOfStream) {
+        static void atualizarClientes(List<Cliente> clientes, string arquivo, int ultimoID)
+        {
+            clientes.Clear();
+
+            if (File.Exists(arquivo))
+            {
+                using (StreamReader sr = new StreamReader(arquivo))
+                {
+                    while (!sr.EndOfStream)
+                    {
                         string linha = sr.ReadLine();
                         string[] campos = linha.Split(';');
                         int id;
@@ -82,8 +96,45 @@ namespace exercicioBancoDeDados
                     }
                 }
             }
+        }
 
-            while (true) {
+        static void Main(string[] args)
+        {
+            string arquivo = "..\clientes.csv";
+            List<Cliente> clientes = new List<Cliente>();
+            int ultimoID = 0;
+
+            if (!File.Exists(arquivo))
+            {
+                using (StreamWriter sw = File.CreateText(arquivo))
+                {
+                }
+            }
+
+            if (File.Exists(arquivo))
+            {
+                using (StreamReader sr = new StreamReader(arquivo))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string linha = sr.ReadLine();
+                        string[] campos = linha.Split(';');
+                        int id;
+                        int.TryParse(campos[0], out id);
+                        string nome = campos[1];
+                        string endereco = campos[2];
+                        string telefone = campos[3];
+                        string email = campos[4];
+                        Cliente cliente = new Cliente(id, nome, endereco, telefone, email);
+                        clientes.Add(cliente);
+                        ultimoID = id;
+                    }
+                }
+
+            }
+
+            while (true)
+            {
 
                 Console.WriteLine("=== CADASTRO DE CLIENTES ===");
                 Console.WriteLine("1 - Cadastrar");
@@ -94,7 +145,8 @@ namespace exercicioBancoDeDados
                 int opcao;
                 while (!checkInt("Opção: ", out opcao)) ;
 
-                switch (opcao) {
+                switch (opcao)
+                {
                     case 1:
                         ultimoID++;
                         Console.WriteLine("Nome: ");
@@ -104,8 +156,9 @@ namespace exercicioBancoDeDados
                         Console.WriteLine("Telefone: ");
                         string telefone = Console.ReadLine();
                         string email = pedirEmail("Email: ");
-                        Cliente cliente = new Cliente(ultimoID, nome, endereco, telefone, email);
-                        clientes.Add(cliente);
+                        Cliente clienteCadastro = new Cliente(ultimoID, nome, endereco, telefone, email);
+                        clientes.Add(clienteCadastro);
+                        salvarClientes(clientes, arquivo);
                         break;
                     case 2:
                         int id;
@@ -115,8 +168,9 @@ namespace exercicioBancoDeDados
                         {
                             Console.WriteLine("Cliente não encontrado.");
                         }
-                        else {
-                            
+                        else
+                        {
+
                             Console.WriteLine("Nome: ");
                             string nomeTroca = Console.ReadLine();
                             Console.WriteLine("Endereço: ");
@@ -130,11 +184,7 @@ namespace exercicioBancoDeDados
                             clienteTroca.Telefone = telefoneTroca;
                             clienteTroca.Email = emailTroca;
 
-                            using (StreamWriter sw = new StreamWriter(arquivo)) {
-                                foreach (Cliente c in clientes) {
-                                    sw.WriteLine($"{c.Id};{c.Nome};{c.Endereco};{c.Telefone};{c.Email}");
-                                }
-                            }
+                            salvarClientes(clientes, arquivo);
 
                         }
                         break;
@@ -146,22 +196,18 @@ namespace exercicioBancoDeDados
                         {
                             Console.WriteLine("Cliente não encontrado. ");
                         }
-                        else {
-                            
+                        else
+                        {
+
 
                             clientes.Remove(clienteExcluir);
 
-                            using (StreamWriter sw = new StreamWriter(arquivo))
-                            {
-                                foreach (Cliente c in clientes)
-                                {
-                                    sw.WriteLine($"{c.Id};{c.Nome};{c.Endereco};{c.Telefone};{c.Email}");
-                                }
-                            }
+                            salvarClientes(clientes, arquivo);
                         }
                         break;
                     case 4:
                         Console.WriteLine("=== LISTA DE CLIENTES ===");
+                        atualizarClientes(clientes, arquivo, ultimoID);
                         foreach (Cliente clienteEscreve in clientes)
                         {
                             Console.WriteLine($"{clienteEscreve.Id};{clienteEscreve.Nome};{clienteEscreve.Endereco};{clienteEscreve.Telefone};{clienteEscreve.Email}");
@@ -169,11 +215,14 @@ namespace exercicioBancoDeDados
                         }
                         break;
                     case 0:
-
-                        return;
+                        salvarClientes(clientes, arquivo);
+                        break;
                 }
             }
-
+            
         }
+
+
+
     }
 }

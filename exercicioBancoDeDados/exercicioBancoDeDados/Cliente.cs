@@ -14,13 +14,13 @@ namespace exercicioBancoDeDados
         private string telefone;
         private string email;
 
-        public Cliente(int id,string nome, string endereco, string telefone, string email)
+        public Cliente(int id, string nome, string endereco, string telefone, string email)
         {
+            this.id = id;
             this.nome = nome;
             this.endereco = endereco;
             this.telefone = telefone;
             this.email = email;
-            this.id = id;
         }
 
         public int Id { get => id; set => id = value; }
