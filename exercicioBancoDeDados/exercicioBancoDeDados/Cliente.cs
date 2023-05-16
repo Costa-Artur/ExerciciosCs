@@ -10,23 +10,27 @@ namespace exercicioBancoDeDados
     {
         private int id;
         private string nome;
-        private string endereco;
         private string telefone;
+        private string endereco;
         private string email;
 
-        public Cliente(int id, string nome, string endereco, string telefone, string email)
+        public Cliente()
+        {
+        }
+
+        public Cliente(int id, string nome, string telefone, string endereco, string email)
         {
             this.id = id;
             this.nome = nome;
-            this.endereco = endereco;
             this.telefone = telefone;
+            this.endereco = endereco;
             this.email = email;
         }
 
-        public int Id { get => id; set => id = value; }
         public string Nome { get => nome; set => nome = value; }
-        public string Endereco { get => endereco; set => endereco = value; }
         public string Telefone { get => telefone; set => telefone = value; }
+        public string Endereco { get => endereco; set => endereco = value; }
         public string Email { get => email; set => email = value; }
+        public int Id { get => id; set => id = value; }
     }
 }

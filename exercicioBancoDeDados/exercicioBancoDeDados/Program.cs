@@ -10,6 +10,8 @@ namespace exercicioBancoDeDados
     class Program
     {
 
+        static List<Cliente> clientes = new List<Cliente>();
+        static string arquivoCSV = "clientes.csv";
 
         static bool checkInt(string prompt, out int value)
         {
@@ -31,7 +33,7 @@ namespace exercicioBancoDeDados
                 {
                     return true;
                 }
-
+                Console.WriteLine("Email Invalido");
                 return false;
             }
             Console.WriteLine("Email Invalido");
@@ -43,186 +45,184 @@ namespace exercicioBancoDeDados
             string email;
             do
             {
-                Console.WriteLine(prompt);
+                Console.Write(prompt);
                 email = Console.ReadLine();
             } while (!checkEmail(email));
             return email;
         }
 
-        static Cliente checkIdCliente(List<Cliente> clientes, int id)
+        static void CadastrarCliente()
         {
-            foreach (Cliente cliente in clientes)
+            Cliente cliente = new Cliente();
+
+            if (clientes.Count > 0)
             {
-                if (cliente.Id == id)
-                {
-                    return cliente;
-                }
+                cliente.Id = clientes[clientes.Count - 1].Id + 1;
             }
-            return null;
+            else
+            {
+                cliente.Id = 1;
+            }
+
+            Console.Write("Digite o nome do cliente: ");
+            cliente.Nome = Console.ReadLine();
+
+            Console.Write("Digite o endereço do cliente: ");
+            cliente.Endereco = Console.ReadLine();
+
+            Console.Write("Digite o telefone do cliente: ");
+            cliente.Telefone = Console.ReadLine();
+
+            cliente.Email = pedirEmail("Digite o e-mail do cliente: ");
+
+            clientes.Add(cliente);
         }
 
-        static void salvarClientes(List<Cliente> clientes, string arquivo)
+        static void EditarCliente()
         {
-            using (StreamWriter sw = new StreamWriter(arquivo))
+            int id;
+            while (!checkInt("Digite o ID do cliente a ser editado: ", out id)) ;
+
+            Cliente cliente = clientes.Find(c => c.Id == id);
+
+            if (cliente != null)
+            {
+
+                Console.Write("Nome: ");
+                cliente.Nome = Console.ReadLine();
+
+                Console.Write("Endereço: ");
+                cliente.Endereco = Console.ReadLine();
+
+                Console.Write("Telefone: ");
+                cliente.Telefone = Console.ReadLine();
+
+                cliente.Email = pedirEmail("Email: ");
+
+            }
+            else
+            {
+                Console.WriteLine("Cliente não encontrado.");
+            }
+        }
+
+        static void ExcluirCliente()
+        {
+            int id;
+            while (!checkInt("Digite o ID do cliente a ser excluído: ", out id)) ;
+
+            Cliente cliente = clientes.Find(c => c.Id == id);
+
+            if (cliente != null)
+            {
+                clientes.Remove(cliente);
+                Console.WriteLine("Cliente excluído com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Cliente não encontrado.");
+            }
+        }
+
+        static void ListarClientes()
+        {
+            if (clientes.Count == 0)
+            {
+                Console.WriteLine("Não há clientes cadastrados.");
+            }
+            else
+            {
+                Console.WriteLine("Lista de clientes cadastrados:");
+                foreach (Cliente cliente in clientes)
+                {
+                    Console.WriteLine($"Id: {cliente.Id}");
+                    Console.WriteLine($"Nome: {cliente.Nome}");
+                    Console.WriteLine($"Endereço: {cliente.Endereco}");
+                    Console.WriteLine($"Telefone: {cliente.Telefone}");
+                    Console.WriteLine($"E-mail: {cliente.Email}");
+                    Console.WriteLine("-----------------------------");
+                }
+            }
+        }
+
+        static void CarregarClientes()
+        {
+            if (File.Exists(arquivoCSV))
+            {
+                using (StreamReader sr = new StreamReader(arquivoCSV))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string linha = sr.ReadLine();
+                        string[] dados = linha.Split(',');
+
+                        Cliente cliente = new Cliente();
+                        cliente.Id = int.Parse(dados[0]);
+                        cliente.Nome = dados[1];
+                        cliente.Endereco = dados[2];
+                        cliente.Telefone = dados[3];
+                        cliente.Email = dados[4];
+
+                        clientes.Add(cliente);
+                    }
+                }
+            }
+        }
+
+        static void SalvarClientes()
+        {
+            using (StreamWriter sw = new StreamWriter(arquivoCSV))
             {
                 foreach (Cliente cliente in clientes)
                 {
-                    sw.WriteLine($"{cliente.Id};{cliente.Nome};{cliente.Endereco};{cliente.Telefone};{cliente.Email}");
+                    string linha = $"{cliente.Id},{cliente.Nome},{cliente.Endereco},{cliente.Telefone},{cliente.Email}";
+                    sw.WriteLine(linha);
                 }
             }
         }
 
-        static void atualizarClientes(List<Cliente> clientes, string arquivo, int ultimoID)
-        {
-            clientes.Clear();
-
-            if (File.Exists(arquivo))
-            {
-                using (StreamReader sr = new StreamReader(arquivo))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string linha = sr.ReadLine();
-                        string[] campos = linha.Split(';');
-                        int id;
-                        int.TryParse(campos[0], out id);
-                        string nome = campos[1];
-                        string endereco = campos[2];
-                        string telefone = campos[3];
-                        string email = campos[4];
-                        Cliente cliente = new Cliente(id, nome, endereco, telefone, email);
-                        clientes.Add(cliente);
-                        ultimoID = id;
-                    }
-                }
-            }
-        }
 
         static void Main(string[] args)
         {
-            string arquivo = "..\clientes.csv";
-            List<Cliente> clientes = new List<Cliente>();
-            int ultimoID = 0;
+            CarregarClientes();
 
-            if (!File.Exists(arquivo))
+            int opcao = 0;
+            while (opcao != 5)
             {
-                using (StreamWriter sw = File.CreateText(arquivo))
-                {
-                }
-            }
-
-            if (File.Exists(arquivo))
-            {
-                using (StreamReader sr = new StreamReader(arquivo))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string linha = sr.ReadLine();
-                        string[] campos = linha.Split(';');
-                        int id;
-                        int.TryParse(campos[0], out id);
-                        string nome = campos[1];
-                        string endereco = campos[2];
-                        string telefone = campos[3];
-                        string email = campos[4];
-                        Cliente cliente = new Cliente(id, nome, endereco, telefone, email);
-                        clientes.Add(cliente);
-                        ultimoID = id;
-                    }
-                }
-
-            }
-
-            while (true)
-            {
-
-                Console.WriteLine("=== CADASTRO DE CLIENTES ===");
+                Console.WriteLine("----------------");
                 Console.WriteLine("1 - Cadastrar");
                 Console.WriteLine("2 - Editar");
                 Console.WriteLine("3 - Excluir");
                 Console.WriteLine("4 - Listar todos");
-                Console.WriteLine("0 - Sair");
-                int opcao;
-                while (!checkInt("Opção: ", out opcao)) ;
+                Console.WriteLine("5 - Sair");
+                Console.WriteLine("----------------");
+
+                while (!checkInt("Digite a opção desejada: ", out opcao)) ;
+                Console.WriteLine();
 
                 switch (opcao)
                 {
                     case 1:
-                        ultimoID++;
-                        Console.WriteLine("Nome: ");
-                        string nome = Console.ReadLine();
-                        Console.WriteLine("Endereco: ");
-                        string endereco = Console.ReadLine();
-                        Console.WriteLine("Telefone: ");
-                        string telefone = Console.ReadLine();
-                        string email = pedirEmail("Email: ");
-                        Cliente clienteCadastro = new Cliente(ultimoID, nome, endereco, telefone, email);
-                        clientes.Add(clienteCadastro);
-                        salvarClientes(clientes, arquivo);
+                        CadastrarCliente();
                         break;
                     case 2:
-                        int id;
-                        while (!checkInt("ID do cliente a ser editado: ", out id)) ;
-                        Cliente clienteTroca = checkIdCliente(clientes, id);
-                        if (clienteTroca == null)
-                        {
-                            Console.WriteLine("Cliente não encontrado.");
-                        }
-                        else
-                        {
-
-                            Console.WriteLine("Nome: ");
-                            string nomeTroca = Console.ReadLine();
-                            Console.WriteLine("Endereço: ");
-                            string enderecoTroca = Console.ReadLine();
-                            Console.WriteLine("Telefone: ");
-                            string telefoneTroca = Console.ReadLine();
-                            string emailTroca = pedirEmail("Email: ");
-
-                            clienteTroca.Nome = nomeTroca;
-                            clienteTroca.Endereco = enderecoTroca;
-                            clienteTroca.Telefone = telefoneTroca;
-                            clienteTroca.Email = emailTroca;
-
-                            salvarClientes(clientes, arquivo);
-
-                        }
+                        EditarCliente();
                         break;
                     case 3:
-                        int idExcluir;
-                        while (!checkInt("Id do cliente a ser excluido: ", out idExcluir)) ;
-                        Cliente clienteExcluir = checkIdCliente(clientes, idExcluir);
-                        if (clienteExcluir == null)
-                        {
-                            Console.WriteLine("Cliente não encontrado. ");
-                        }
-                        else
-                        {
-
-
-                            clientes.Remove(clienteExcluir);
-
-                            salvarClientes(clientes, arquivo);
-                        }
+                        ExcluirCliente();
                         break;
                     case 4:
-                        Console.WriteLine("=== LISTA DE CLIENTES ===");
-                        atualizarClientes(clientes, arquivo, ultimoID);
-                        foreach (Cliente clienteEscreve in clientes)
-                        {
-                            Console.WriteLine($"{clienteEscreve.Id};{clienteEscreve.Nome};{clienteEscreve.Endereco};{clienteEscreve.Telefone};{clienteEscreve.Email}");
-                            Console.WriteLine("--------------");
-                        }
+                        ListarClientes();
                         break;
-                    case 0:
-                        salvarClientes(clientes, arquivo);
+                    case 5:
                         break;
                 }
+
+                Console.WriteLine();
             }
-            
+
+            SalvarClientes();
         }
-
-
 
     }
 }
